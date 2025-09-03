@@ -4,322 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantify - Login</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .login-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 450px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .login-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #ff6b6b);
-        }
-        
-        .logo-section {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-        
-        .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
-        
-        .tagline {
-            color: #718096;
-            font-size: 1rem;
-            margin-bottom: 30px;
-        }
-        
-        .welcome-text {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .welcome-text h2 {
-            color: #2d3748;
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-        
-        .welcome-text p {
-            color: #718096;
-            font-size: 1rem;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 0.95rem;
-        }
-        
-        .input-wrapper {
-            position: relative;
-        }
-        
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 15px 20px;
-            padding-left: 50px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: #f8fafc;
-        }
-        
-        input[type="text"]:focus, input[type="password"]:focus {
-            outline: none;
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-        }
-        
-        .input-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2rem;
-            color: #718096;
-            transition: color 0.3s ease;
-        }
-        
-        input:focus + .input-icon {
-            color: #667eea;
-        }
-        
-        .password-toggle {
-            position: absolute;
-            right: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #718096;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-        
-        .password-toggle:hover {
-            color: #667eea;
-        }
-        
-        .forgot-password {
-            text-align: right;
-            margin-bottom: 25px;
-        }
-        
-        .forgot-password a {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        .forgot-password a:hover {
-            color: #5a6fd8;
-        }
-        
-        .login-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 16px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-        
-        .login-btn:active {
-            transform: translateY(0);
-        }
-        
-        .login-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .user-type-selector {
-            margin-bottom: 25px;
-        }
-        
-        .user-type-options {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .user-type-option {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            background: #f8fafc;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        .user-type-option:hover {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.05);
-        }
-        
-        .user-type-option.active {
-            border-color: #667eea;
-            background: #667eea;
-            color: white;
-        }
-        
-        .security-note {
-            background: #f0f8ff;
-            border: 1px solid #b8daff;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 25px;
-            font-size: 0.9rem;
-            color: #0066cc;
-        }
-        
-        .security-note strong {
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .footer-links {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 25px;
-            border-top: 1px solid #e2e8f0;
-        }
-        
-        .footer-links a {
-            color: #718096;
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin: 0 15px;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: #667eea;
-        }
-        
-        .error-message {
-            background: #fed7d7;
-            border: 1px solid #fc8181;
-            color: #c53030;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            display: none;
-        }
-        
-        .success-message {
-            background: #c6f6d5;
-            border: 1px solid #68d391;
-            color: #2f855a;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            display: none;
-        }
-        
-        .loading {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ffffff;
-            border-top: 2px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 10px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @media (max-width: 480px) {
-            .login-container {
-                margin: 20px;
-                padding: 30px 25px;
-            }
-            
-            .logo {
-                font-size: 2rem;
-            }
-            
-            .welcome-text h2 {
-                font-size: 1.5rem;
-            }
-            
-            .user-type-options {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="login-container">
@@ -396,109 +81,107 @@
             <a href="#" onclick="showPrivacy()">Privacy Policy</a>
         </div>
     </div>
-
+<
     <script>
-        // User type selection
-        document.querySelectorAll('.user-type-option').forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove active class from all options
-                document.querySelectorAll('.user-type-option').forEach(opt => opt.classList.remove('active'));
-                // Add active class to clicked option
-                this.classList.add('active');
-                // Update hidden input value
-                document.getElementById('userType').value = this.dataset.type;
-            });
-        });
+    // User type selection
+document.querySelectorAll('user-type-option').forEach(option => {
+    option.addEventListener('click', function() {
+        // Remove active class from all options
+        document.querySelectorAll('.user-type-option').forEach(opt => opt.classList.remove('active'));
+        // Add active class to clicked option
+        this.classList.add('active');
+        // Update hidden input value
+        document.getElementById('userType').value = this.dataset.type;
+    });
+});
 
-        // Password toggle functionality
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleButton = document.querySelector('.password-toggle');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleButton.textContent = '🙈';
-            } else {
-                passwordInput.type = 'password';
-                toggleButton.textContent = '👁️';
-            }
-        }
+// Password toggle functionality
+function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const toggleButton = document.querySelector('.password-toggle');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleButton.textContent = '🙈';
+    } else {
+        passwordInput.type = 'password';
+        toggleButton.textContent = '👁️';
+    }
+}
 
-        // Form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+// Form submission
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const userType = document.getElementById('userType').value;
+    const loginButton = document.getElementById('loginButton');
+    const buttonText = document.getElementById('buttonText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    
+    // Hide previous messages
+    errorMessage.style.display = 'none';
+    successMessage.style.display = 'none';
+    
+    // Show loading state
+    loginButton.disabled = true;
+    loadingSpinner.style.display = 'inline-block';
+    buttonText.textContent = 'Signing In...';
+    
+    // Simulate login process (replace with actual authentication)
+    setTimeout(() => {
+        // Demo credentials - replace with actual authentication logic
+        const validCredentials = {
+            'manager': { username: 'manager', password: 'manager123' },
+            'employee': { username: 'employee', password: 'emp123' },
+            'admin': { username: 'admin', password: 'admin123' }
+        };
+        
+        const userCreds = validCredentials[userType];
+        
+        if (userCreds && username === userCreds.username && password === userCreds.password) {
+            // Success
+            successMessage.style.display = 'block';
+            buttonText.textContent = 'Success!';
             
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const userType = document.getElementById('userType').value;
-            const loginButton = document.getElementById('loginButton');
-            const buttonText = document.getElementById('buttonText');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const errorMessage = document.getElementById('errorMessage');
-            const successMessage = document.getElementById('successMessage');
-            
-            // Hide previous messages
-            errorMessage.style.display = 'none';
-            successMessage.style.display = 'none';
-            
-            // Show loading state
-            loginButton.disabled = true;
-            loadingSpinner.style.display = 'inline-block';
-            buttonText.textContent = 'Signing In...';
-            
-            // Simulate login process (replace with actual authentication)
+            // Redirect to index.html after 1.5 seconds
             setTimeout(() => {
-                // Demo credentials - replace with actual authentication logic
-                const validCredentials = {
-                    'manager': { username: 'manager', password: 'manager123' },
-                    'employee': { username: 'employee', password: 'emp123' },
-                    'admin': { username: 'admin', password: 'admin123' }
-                };
-                
-                const userCreds = validCredentials[userType];
-                
-                if (username === userCreds.username && password === userCreds.password) {
-                    // Success
-                    successMessage.style.display = 'block';
-                    buttonText.textContent = 'Success!';
-                    
-                    // Redirect after 2 seconds
-                    setTimeout(() => {
-                        alert('Login successful! Redirecting to ' + userType + ' dashboard...');
-                        // In a real application, redirect to appropriate dashboard
-                        // window.location.href = '/dashboard/' + userType;
-                    }, 2000);
-                } else {
-                    // Error
-                    errorMessage.style.display = 'block';
-                    loginButton.disabled = false;
-                    loadingSpinner.style.display = 'none';
-                    buttonText.textContent = 'Sign In';
-                }
+                window.location.href = 'index.html';
             }, 1500);
-        });
-
-        // Helper functions for footer links
-        function showForgotPassword() {
-            alert('Password reset functionality would be implemented here.\n\nFor demo purposes:\n- Manager: manager/manager123\n- Employee: employee/emp123\n- Admin: admin/admin123');
+        } else {
+            // Error
+            errorMessage.style.display = 'block';
+            loginButton.disabled = false;
+            loadingSpinner.style.display = 'none';
+            buttonText.textContent = 'Sign In';
         }
+    }, 1500);
+});
 
-        function showHelp() {
-            alert('Help documentation would open here.\n\nFor technical support, contact your system administrator.');
-        }
+// Helper functions for footer links
+function showForgotPassword() {
+    alert('Password reset functionality would be implemented here.\n\nFor demo purposes:\n- Manager: manager/manager123\n- Employee: employee/emp123\n- Admin: admin/admin123');
+}
 
-        function showContact() {
-            alert('Contact Support:\n\nEmail: support@quantify-inventory.com\nPhone: +234-xxx-xxx-xxxx\nWorking Hours: 8AM - 6PM WAT');
-        }
+function showHelp() {
+    alert('Help documentation would open here.\n\nFor technical support, contact your system administrator.');
+}
 
-        function showPrivacy() {
-            alert('Privacy Policy would be displayed here.\n\nQuantify respects your privacy and follows data protection regulations.');
-        }
+function showContact() {
+    alert('Contact Support:\n\nEmail: support@quantify-inventory.com\nPhone: +234-xxx-xxx-xxxx\nWorking Hours: 8AM - 6PM WAT');
+}
 
-        // Auto-focus on username field
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('username').focus();
-        });
+function showPrivacy() {
+    alert('Privacy Policy would be displayed here.\n\nQuantify respects your privacy and follows data protection regulations.');
+}
+
+// Auto-focus on username field
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('username').focus();
+});
     </script>
 </body>
 </html>
