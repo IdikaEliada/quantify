@@ -3,62 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantify UI Mockups</title>
+    <title>Quantify - Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Quantify Inventory System - UI Mockups</h1>
-        
-        <!-- Dashboard Mockup -->
-        <div class="mockup-section">
-            <div class="section-header">
-                Store Manager Dashboard
-            </div>
-            <div class="mockup-content">
-                <div class="dashboard-grid">
-                    <div class="stat-card low-stock">
-                        <div class="stat-number">7</div>
-                        <div class="stat-label">Low Stock Alerts</div>
-                    </div>
-                    <div class="stat-card recent-sales">
-                        <div class="stat-number">₦2.4M</div>
-                        <div class="stat-label">Recent Sales (Today)</div>
-                    </div>
-                    <div class="stat-card inventory-value">
-                        <div class="stat-number">₦15.2M</div>
-                        <div class="stat-label">Total Inventory Value</div>
-                    </div>
-                </div>
-                
-                <div class="alerts-section">
-                    <h3 style="color: #c53030; margin-bottom: 15px;">🚨 Critical Low Stock Alerts</h3>
-                    <div class="alert-item">
-                        <span class="alert-product">iPhone 15 Pro (128GB)</span>
-                        <span class="alert-stock">2 units left</span>
-                    </div>
-                    <div class="alert-item">
-                        <span class="alert-product">Samsung Galaxy S24</span>
-                        <span class="alert-stock">1 unit left</span>
-                    </div>
-                    <div class="alert-item">
-                        <span class="alert-product">MacBook Air M2</span>
-                        <span class="alert-stock">3 units left</span>
-                    </div>
-                    <div class="alert-item">
-                        <span class="alert-product">AirPods Pro (2nd Gen)</span>
-                        <span class="alert-stock">5 units left</span>
-                    </div>
-                </div>
-                
-               <div class="quick-actions">
-    <a href="product.html"><button class="action-btn">Add New Product</button></a>
-    <a href="report.html"><button class="action-btn">Generate Report</button></a>
-    <a href="#"><button class="action-btn">View All Inventory</button></a>
-    <a href="#"><button class="action-btn">Manage Suppliers</button></a>
-                </div>
-
-            </div>
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo">Quantify</div>
+            <div class="tagline">Inventory Management System</div>
         </div>
+        
+        <div class="welcome-text">
+            <h2>Welcome Back</h2>
+            <p>Please sign in to access your dashboard</p>
+        </div>
+        
+        <div class="error-message" id="errorMessage">
+            Invalid username or password. Please try again.
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            Login successful! Redirecting to dashboard...
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="userType">User Type</label>
+                <div class="user-type-options">
+                    <div class="user-type-option active" data-type="manager">
+                        Store Manager
+                    </div>
+                    <div class="user-type-option" data-type="employee">
+                        Employee
+                    </div>
+                    <div class="user-type-option" data-type="admin">
+                        Admin
+                    </div>
+                </div>
+                <input type="hidden" id="userType" value="manager">
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                    <div class="input-icon">👤</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <div class="input-icon">🔒</div>
+                    <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+                </div>
+            </div>
+            
+            <div class="forgot-password">
+                <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+            </div>
+            
+            <button type="submit" class="login-btn" id="loginButton">
+                <div class="loading" id="loadingSpinner"></div>
+                <span id="buttonText">Sign In</span>
+            </button>
+        </form>
+        
+        <div class="security-note">
+            <strong>Security Notice:</strong>
+            Your session will automatically expire after 30 minutes of inactivity. Always log out when finished.
+        </div>
+        
+        <div class="footer-links">
+            <a href="#" onclick="showHelp()">Help</a>
+            <a href="#" onclick="showContact()">Contact Support</a>
+            <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+        </div>
+    </div>
+<
+    <script>
+    // User type selection
+document.querySelectorAll('user-type-option').forEach(option => {
+    option.addEventListener('click', function() {
+        // Remove active class from all options
+        document.querySelectorAll('.user-type-option').forEach(opt => opt.classList.remove('active'));
+        // Add active class to clicked option
+        this.classList.add('active');
+        // Update hidden input value
+        document.getElementById('userType').value = this.dataset.type;
+    });
+});
+
+// Password toggle functionality
+function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const toggleButton = document.querySelector('.password-toggle');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleButton.textContent = '🙈';
+    } else {
+        passwordInput.type = 'password';
+        toggleButton.textContent = '👁️';
+    }
+}
+
+// Form submission
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const userType = document.getElementById('userType').value;
+    const loginButton = document.getElementById('loginButton');
+    const buttonText = document.getElementById('buttonText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    
+    // Hide previous messages
+    errorMessage.style.display = 'none';
+    successMessage.style.display = 'none';
+    
+    // Show loading state
+    loginButton.disabled = true;
+    loadingSpinner.style.display = 'inline-block';
+    buttonText.textContent = 'Signing In...';
+    
+    // Simulate login process (replace with actual authentication)
+    setTimeout(() => {
+        // Demo credentials - replace with actual authentication logic
+        const validCredentials = {
+            'manager': { username: 'manager', password: 'manager123' },
+            'employee': { username: 'employee', password: 'emp123' },
+            'admin': { username: 'admin', password: 'admin123' }
+        };
+        
+        const userCreds = validCredentials[userType];
+        
+        if (userCreds && username === userCreds.username && password === userCreds.password) {
+            // Success
+            successMessage.style.display = 'block';
+            buttonText.textContent = 'Success!';
+            
+            // Redirect to index.html after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        } else {
+            // Error
+            errorMessage.style.display = 'block';
+            loginButton.disabled = false;
+            loadingSpinner.style.display = 'none';
+            buttonText.textContent = 'Sign In';
+        }
+    }, 1500);
+});
+
+// Helper functions for footer links
+function showForgotPassword() {
+    alert('Password reset functionality would be implemented here.\n\nFor demo purposes:\n- Manager: manager/manager123\n- Employee: employee/emp123\n- Admin: admin/admin123');
+}
+
+function showHelp() {
+    alert('Help documentation would open here.\n\nFor technical support, contact your system administrator.');
+}
+
+function showContact() {
+    alert('Contact Support:\n\nEmail: support@quantify-inventory.com\nPhone: +234-xxx-xxx-xxxx\nWorking Hours: 8AM - 6PM WAT');
+}
+
+function showPrivacy() {
+    alert('Privacy Policy would be displayed here.\n\nQuantify respects your privacy and follows data protection regulations.');
+}
+
+// Auto-focus on username field
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('username').focus();
+});
+    </script>
 </body>
 </html>
