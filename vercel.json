@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/quantify/frontend/login", "destination": "/login.js" },
-    { "source": "/", "destination": "/login.js" }
+    { "source": "/", "destination": "/login.html" },
+    { "source": "/quantify/frontend/login", "destination": "/login.html" }
   ]
 }
