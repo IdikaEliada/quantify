@@ -81,6 +81,156 @@
             <a href="#" onclick="showPrivacy()">Privacy Policy</a>
         </div>
     </div>
+
+    <script>
+        // User type selection
+        document.querySelectorAll('.user-type-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.user-type-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('userType').value = this.dataset.type;
+            });
+        });
+
+        // Password toggle functionality
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleButton = document.querySelector('.password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.textContent = '👁️';
+            }
+        }
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const userType = document.getElementById('userType').value;
+            const loginButton = document.getElementById('loginButton');
+            const buttonText = document.getElementById('buttonText');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Hide previous messages
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            // Basic validation
+            if (!username || !password) {
+                errorMessage.textContent = 'Please fill in all fields.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            // Show loading state
+            loginButton.disabled = true;
+            loadingSpinner.style.display = 'inline-block';
+            buttonText.textContent = 'Signing In...';
+            
+            // Simulate login process (replace with actual authentication)
+            setTimeout(() => {
+                const validCredentials = {
+                    'manager': { username: 'manager', password: 'manager123', redirect: 'manager.html' },
+                    'employee': { username: 'employee', password: 'emp123', redirect: 'employee.html' },
+                    'admin': { username: 'admin', password: 'admin123', redirect: 'admin.html' }
+                };
+                
+                const userCreds = validCredentials[userType];
+                
+                if (userCreds && username === userCreds.username && password === userCreds.password) {
+                    successMessage.style.display = 'block';
+                    buttonText.textContent = 'Success!';
+                    setTimeout(() => {
+                        window.location.href = userCreds.redirect;
+                    }, 1500);
+                } else {
+                    errorMessage.textContent = 'Invalid username or password.';
+                    errorMessage.style.display = 'block';
+                    loginButton.disabled = false;
+                    loadingSpinner.style.display = 'none';
+                    buttonText.textContent = 'Sign In';
+                }
+            }, 1500);
+        });
+
+        // Helper functions for footer links
+        function showForgotPassword() {
+            alert('Password reset functionality would be implemented here.\n\nFor demo purposes:\n- Manager: manager/manager123\n- Employee: employee/emp123\n- Admin: admin/admin123');
+        }
+
+        function showHelp() {
+            alert('Help documentation would open here.\n\nFor technical support, contact your system administrator.');
+        }
+
+        function showContact() {
+            alert('Contact Support:\n\nEmail: support@quantify-inventory.com\nPhone: +234-xxx-xxx-xxxx\nWorking Hours: 8AM - 6PM WAT');
+        }
+
+        function showPrivacy() {
+            alert('Privacy Policy would be displayed here.\n\nQuantify respects your privacy and follows data protection regulations.');
+        }
+
+        // Auto-focus on username field
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('username').focus();
+        });
+    </script>
+</body>
+</html>                        Employee
+                    </div>
+                    <div class="user-type-option" data-type="admin">
+                        Admin
+                    </div>
+                </div>
+                <input type="hidden" id="userType" value="manager">
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                    <div class="input-icon">👤</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <div class="input-icon">🔒</div>
+                    <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+                </div>
+            </div>
+            
+            <div class="forgot-password">
+                <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+            </div>
+            
+            <button type="submit" class="login-btn" id="loginButton">
+                <div class="loading" id="loadingSpinner"></div>
+                <span id="buttonText">Sign In</span>
+            </button>
+        </form>
+        
+        <div class="security-note">
+            <strong>Security Notice:</strong>
+            Your session will automatically expire after 30 minutes of inactivity. Always log out when finished.
+        </div>
+        
+        <div class="footer-links">
+            <a href="#" onclick="showHelp()">Help</a>
+            <a href="#" onclick="showContact()">Contact Support</a>
+            <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+        </div>
+    </div>
 <
     <script>
     // User type selection
