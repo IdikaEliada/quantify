@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantify - Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">Quantify</div>
+            <div class="tagline">Inventory Management System</div>
+            <button class="logout-btn" onclick="logout()">Log Out</button>
+        </header>
+        
+        <main class="dashboard-content">
+            <h1>Welcome, Admin!</h1>
+            <p>Manage users, inventory, and system settings from here.</p>
+            
+            <div class="dashboard-section">
+                <h2>System Management</h2>
+                <ul>
+                    <li>Manage user accounts</li>
+                    <li>View system logs</li>
+                    <li>Configure inventory settings</li>
+                </ul>
+            </div>
+            
+            <div class="dashboard-section">
+                <h2>Quick Actions</h2>
+                <button onclick="alert('Feature coming soon!')">Add New User</button>
+                <button onclick="alert('Feature coming soon!')">Generate System Report</button>
+                <button onclick="alert('Feature coming soon!')">Update Settings</button>
+            </div>
+        </main>
+        
+        <footer class="dashboard-footer">
+            <a href="#" onclick="showHelp()">Help</a>
+            <a href="#" onclick="showContact()">Contact Support</a>
+            <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+        </footer>
+    </div>
+
+    <script>
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'index.html';
+        }
+
+        function showHelp() {
+            alert('Admin Help: Refer to the admin manual or contact technical support.');
+        }
+
+        function showContact() {
+            alert('Contact Support:\n\nEmail: support@quantify-inventory.com\nPhone: +234-xxx-xxx-xxxx\nWorking Hours: 8AM - 6PM WAT');
+        }
+
+        function showPrivacy() {
+            alert('Privacy Policy: Quantify respects your privacy and follows data protection regulations.');
+        }
+    </script>
+</body>
+</html>
